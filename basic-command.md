@@ -87,8 +87,50 @@ grep可以显示文件和输入流中和参数匹配的行
 $ grep root /etc/passwd
 ```
 可用于显示文件/etc/passwd中包含文本root的所有行。
-在对对个文件进行批量操作时，grep命令十分好用,因为它显示文件名和匹配内容。比如
+在对多个文件进行批量操作时，grep命令十分好用,因为它显示文件名和匹配内容。比如
 ```
 $ grep root /etc/*
 ```
 可以查看/etc/目录下中所有包含root的文件
+下面是他的输出
+```
+grep: /etc/acpi:Is a directory
+grep: /etc/Permission denied
+/etc/anacrontab:HOME=/root
+```
+可以看到，grep可以看出文件夹,或是文件内容中含root的部分。
+grep命令有两个参数比较重要，一个是-i(不区分大小写),一个是-V（反转匹配，显示所有不匹配的行）,此外还有功能更强大的egrep(grep -E)。
+grep可以识别正则表达式。
+### 6.2 less命令
+less用于查看大文件,如less /usr/share/dict/words，可以查看/usr/share/dict/words文件，less命令可以将内容分屏显示，按空格键可以查看下一屏，B看上一屏，Q退出。less是more的增强版本，一些Unix系统只能用more。
+由于Linux采用标准输入输出,因此可以将一个进程的输出作为另一个进程的输入，如
+```
+$ grep ie /usr/share/dict/words | less
+```
+如果我们跑一下的话，会发现这个结果很多，有1000多行，用less更好处理这么多行。
+### 6.3 pwd 命令
+pwd命令输出当前工作目录名，其应用于1.并不是所欲提示符都显示当前路径名，因此我们可以用它查看当前路径；2.使用符号链接的时候通常很难获知当前目录信息，可以用pwd -p查看。
+### 6.4 diff命令
+diff可以查看文件间的不同
+```
+$ diff file1 file2
+```
+该命令有几个选项可以设置输出结果的格式，如diff -u
+### 6.5 file 命令
+file命令可以查看文件的格式信息
+```
+file file1
+```
+这是对readme.txt的结果
+```
+readme.txt: ASCII text
+```
+### 6.6 find 和locate命令
+```
+$ find dir -name file -print
+```
+可以帮助我们在目录下找文件，它可以使用模式匹配参数(如*,但是必须加引号（'*'），一面shell自动将它们展开,因为在命令前shell会展开通配符)
+另一个是locate，它可以在系统创建的文件索引中查找文件，比find快，但对于没有加入到索引中的文件（如新文件）它找不到了.
+### 6.7 head 和 tail 命令
+head 显示文件前十行内容,tail显示后十行内容,可以用-n设置显示行数，+n表示从第n行开始。
+### 6.8 sort
