@@ -28,6 +28,10 @@ $ cp file1 file2
 $ cp file1 file2 ... dir
 ```
 把多个文件复制到目录dir
+```
+$ cp -r dir path
+```
+把文件夹复制到目录path下
 ### 4.3 mv 
 mv命令可以用来重命名文件
 ```
